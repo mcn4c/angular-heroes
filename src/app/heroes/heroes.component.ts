@@ -10,22 +10,19 @@ import { HEROES } from "../mock-heroes";
 })
 export class HeroesComponent implements OnInit {
   heroes= HEROES;
-
-  
-
   selectedHero?: Hero;
 
-  onSelect(hero: Hero): void {
-    this.selectedHero = hero;
-  }
-
+  
   constructor() { }
-
+  
   //ngOnIt is a lifecycle hook.  Angular calls ngOnIt shortly after creating a component
   //it's a good place to put initialization logic
   ngOnInit(): void {
   }
-
+  
+  onSelect(hero: Hero): void {
+    this.selectedHero = hero;
+  }
  
 
 }
