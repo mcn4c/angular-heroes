@@ -38,6 +38,31 @@ export class HeroesComponent implements OnInit {
       .subscribe(heroes => this.heroes = heroes)
 
   }
+
+
+  //When given name is non-blank the handler creates a hero-like object from the name(it's only missing Id)
+  //and passes it into the services addHero() method
+  //When addHero() saves successfully, the subscribe() callback receives the new hero and pushes it into 
+  //the heroes list for display
+
+  //addHero() differes from update hero in two ways:
+  //it calls HttpClient.post() instead of put()
+  // it expects the server to generate an id for the new hero, which it returns 
+  //in the Observable<Hero> to the caller
+  add(name: string): void {
+    name= name.trim();
+    if(!name) {return; }
+    this.heroService.addHero({ name } as Hero )
+    .subscribe(hero => {
+      this.heroes.push(hero);
+    })
+  }
+
+  delete(hero: Hero): void {
+    this.heroes = this.heroes.filter(h => h!== hero);
+    this.heroService.deleteHero(hero.id).subscribe();
+
+  }
  
 
 }
